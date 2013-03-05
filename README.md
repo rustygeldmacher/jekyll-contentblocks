@@ -1,6 +1,6 @@
 # jekyll-contentblocks
 
-Gives you a mechanism in Jekyll to pass content up from pages into their parent layouts. It's kind of like having Rails' content_for available ion Jekyll.
+Gives you a mechanism in Jekyll to pass content up from pages into their parent layouts. It's kind of like having Rails' content_for available for Jekyll.
 
 ## Installation
 
@@ -30,7 +30,7 @@ Execute:
 $ gem install jekyll-contentblocks
 ```
 
-And initialize it in plugin:
+And initialize it in a plugin:
 ```ruby
 # _plugins/ext.rb
 require "rubygems"
@@ -39,7 +39,7 @@ require "jekyll-contentblocks"
 
 ## Usage
 
-In your layout files, define `contentblock` blocks that say where content will end up. For example, say the file `_layouts/default.md` looks like this:
+In your layout files, define `contentblock` blocks that say where content will end up. For example, say the file `_layouts/default.html` looks like this:
 ```html
 <html>
 	<head>
@@ -50,7 +50,7 @@ In your layout files, define `contentblock` blocks that say where content will e
 			{{ content }}
 		</div>
 		<div class="sidebar">
-			{% contentblock sidebar}
+			{% contentblock sidebar %}
 		</div>
 	</body>
 </html>
@@ -71,6 +71,8 @@ Here is my post content.
 * with some {{ 'liquid' }} tags too!
 {% endcontentfor %}
 ```
+
+Note that we didn't add anything to the `scripts` block in the post. That's OK, content blocks without any content will be ignored.
 
 ## Contributing
 
