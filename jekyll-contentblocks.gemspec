@@ -8,7 +8,7 @@ Gem::Specification.new do |gem|
   gem.version       = Jekyll::ContentBlocks::VERSION
   gem.authors       = ["Rusty Geldmacher"]
   gem.email         = ["russell.geldmacher@gmail.com"]
-  gem.description   = %q{Provides a mechanism for passing content up to the layout}
+  gem.description   = %q{Provides a mechanism for passing content up to the layout, like Rails' content_for}
   gem.summary       = %q{A Jekyll plugin kind of like Rails' content_for}
   gem.homepage      = "https://github.com/rustygeldmacher/jekyll-contentblocks"
 
