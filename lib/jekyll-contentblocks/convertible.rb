@@ -5,6 +5,7 @@ module Jekyll
     def do_layout(payload, layouts)
       # The contentblock tags needs access to the converter to process it while rendering.
       payload['converter'] = self.converter
+      payload['contentblocks'] = {}
       do_layout_orig(payload, layouts)
     end
   end
