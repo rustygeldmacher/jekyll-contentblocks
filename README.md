@@ -78,7 +78,7 @@ Note that we didn't add anything to the `scripts` block in the post. That's OK, 
 
 We might want to check if the particular contentblock exists before using it in our template:
 
-* [Capture](http://docs.shopify.com/themes/liquid-basics/logic) contents of the `sidebar` contentlock to a variable `result`
+* [Capture](http://docs.shopify.com/themes/liquid-basics/logic) contents of the `sidebar` contentblock to a variable `result`
 * If `result` is not empty, output its contents surrounded with desired markup
 
 ```liquid
