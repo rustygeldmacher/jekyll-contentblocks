@@ -74,6 +74,23 @@ Here is my post content.
 
 Note that we didn't add anything to the `scripts` block in the post. That's OK, content blocks without any content will be ignored.
 
+### Checking if contentblock exists
+
+We might want to check if the particular contentblock exists before using it in our template:
+
+* [Capture](http://docs.shopify.com/themes/liquid-basics/logic) contents of the `sidebar` contentblock to a variable `result`
+* If `result` is not empty, output its contents surrounded with desired markup
+
+```liquid
+{% capture result %}{% contentblock sidebar %}{% endcapture %}
+
+{% if result != '' %}
+...template markup...
+{{ result }}
+...template markup...
+{% endif %}
+```
+
 ## Contributing
 
 1. Fork it
