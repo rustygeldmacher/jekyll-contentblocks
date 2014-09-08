@@ -11,7 +11,6 @@ module Jekyll
 
       def render(context)
         content_for_block(context) << render_block(context)
-        # Render nothing right now
         ''
       end
     end

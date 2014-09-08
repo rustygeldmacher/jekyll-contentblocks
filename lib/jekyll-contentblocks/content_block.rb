@@ -9,8 +9,11 @@ module Jekyll
       end
 
       def render(context)
-        converter = context.environments.first['converter']
-        content_for_block(context).map { |c| converter.convert(c || '') }.join
+        block_content = content_for_block(context).join
+        converters = context.environments.first['converters']
+        converters.reduce(block_content) do |content, converter|
+          converter.convert(content)
+        end
       end
     end
   end
