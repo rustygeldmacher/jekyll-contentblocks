@@ -11,7 +11,7 @@ module Jekyll
       def render(context)
         block_content = content_for_block(context).join
         converters = context.environments.first['converters']
-        converters.reduce(block_content) do |content, converter|
+        Array(converters).reduce(block_content) do |content, converter|
           converter.convert(content)
         end
       end
