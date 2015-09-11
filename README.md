@@ -98,3 +98,14 @@ We might want to check if the particular contentblock exists before using it in 
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+### Running the tests
+
+Try to make sure that your changes work with all of the latest point releases
+of Jekyll. To do this, run the test suite:
+
+```bash
+> bundle
+> bundle exec appraisal install
+> bundle exec appraisal rpsec
+```
