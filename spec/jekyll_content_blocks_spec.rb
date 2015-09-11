@@ -22,5 +22,19 @@ describe Jekyll::ContentBlocks do
       expect(rendered_liquid).not_to be_nil
       expect(rendered_liquid.text).to eq '3'
     end
+
+    it 'does not render a block without content' do
+      expect(page.css('head > style')).to be_empty
+    end
+
+    describe 'ifnothascontent' do
+      it 'renders defaults when content is not supplied' do
+        expect(page.css('div#footer')).not_to be_empty
+      end
+
+      it 'does not render when there is content' do
+        expect(page.css('div[class=sidebar-default]')).to be_empty
+      end
+    end
   end
 end

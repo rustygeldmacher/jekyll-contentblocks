@@ -42,17 +42,17 @@ require "jekyll-contentblocks"
 In your layout files, define `contentblock` blocks that say where content will end up. For example, say the file `_layouts/default.html` looks like this:
 ```html
 <html>
-	<head>
-		{% contentblock scripts %}
-	</head>
-	<body>
-		<div class="main">
-			{{ content }}
-		</div>
-		<div class="sidebar">
-			{% contentblock sidebar %}
-		</div>
-	</body>
+  <head>
+    {% contentblock scripts %}
+  </head>
+  <body>
+    <div class="main">
+      {{ content }}
+    </div>
+    <div class="sidebar">
+      {% contentblock sidebar %}
+    </div>
+  </body>
 </html>
 ```
 
@@ -74,21 +74,27 @@ Here is my post content.
 
 Note that we didn't add anything to the `scripts` block in the post. That's OK, content blocks without any content will be ignored.
 
-### Checking if contentblock exists
+### Checking if a block has content
 
-We might want to check if the particular contentblock exists before using it in our template:
-
-* [Capture](http://docs.shopify.com/themes/liquid-basics/logic) contents of the `sidebar` contentblock to a variable `result`
-* If `result` is not empty, output its contents surrounded with desired markup
+We might want to check if the particular contentblock has content before using it in our template.
+To do this, use the `ifhascontent` tag:
 
 ```liquid
-{% capture result %}{% contentblock sidebar %}{% endcapture %}
+{% ifhascontent javascripts %}
+  <script type="text/javascript>
+    {% contentfor javascripts %}
+  </script>
+{% endifhascontent %}
+```
 
-{% if result != '' %}
-...template markup...
-{{ result }}
-...template markup...
-{% endif %}
+Similarly, there's the opposite tag, `ifnothascontent`:
+
+```liquid
+{% ifnothascontent sidebar %}
+  <div>
+    This is our default sidebar.
+  </div>
+{% endifnothascontent %}
 ```
 
 ## Contributing

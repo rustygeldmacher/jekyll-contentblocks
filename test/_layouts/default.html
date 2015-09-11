@@ -1,12 +1,33 @@
 <!doctype html>
 <html lang="en">
   <head>
+    {% ifhascontent css %}
+      <style type="text/css">
+        {% contentblock css %}
+      </style>
+    {% endifhascontent %}
   </head>
+
   <body>
     {{ content }}
-    <div>
-      {% contentblock sidebar %}
+
+    {% ifhascontent sidebar %}
+      <div>
+        {% contentblock sidebar %}
+      </div>
+    {% endifhascontent %}
+
+    {% ifnothascontent sidebar %}
+      <div class="sidebar-default">
+        This is the default sidebar
+      </div>
+    {% endifnothascontent %}
+
+    {% ifnothascontent footer %}
+    <div id="footer">
+      This is the default footer.
     </div>
+    {% endifnothascontent %}
   </body>
 </html>
 
