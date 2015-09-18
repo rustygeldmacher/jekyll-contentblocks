@@ -9,10 +9,12 @@
   </head>
 
   <body>
+    <h1>{{ page.title }}</h1>
+
     {{ content }}
 
     {% ifhascontent sidebar %}
-      <div>
+      <div class="custom-sidebar">
         {% contentblock sidebar %}
       </div>
     {% endifhascontent %}
@@ -22,6 +24,10 @@
         This is the default sidebar
       </div>
     {% endifnothascontent %}
+
+    {% ifhascontent footer %}
+      {% contentblock footer %}
+    {% endifhascontent %}
 
     {% ifnothascontent footer %}
     <div id="footer">

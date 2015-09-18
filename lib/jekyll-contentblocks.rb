@@ -1,6 +1,22 @@
 require 'jekyll'
+
+module Jekyll
+  def self.version_less_than?(version)
+    Gem::Version.new(VERSION) < Gem::Version.new(version)
+  end
+
+  def self.supports_collections?
+    !version_less_than?('2.0.0')
+  end
+end
+
 require 'jekyll/convertible'
 require File.expand_path('../jekyll/convertible', __FILE__)
+
+unless Jekyll.version_less_than?('2.0.0')
+  require 'jekyll/renderer'
+  require File.expand_path('../jekyll/renderer', __FILE__)
+end
 
 require 'jekyll/contentblocks/version'
 require 'jekyll/content_block_tag'
