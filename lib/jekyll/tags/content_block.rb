@@ -1,7 +1,7 @@
 module Jekyll
   module Tags
     class ContentBlock < Liquid::Tag
-      include ::Jekyll::ContentBlockTag
+      include ::Jekyll::ContentBlocks::ContentBlockTag
 
       def render(context)
         block_content = content_for_block(context).join

@@ -1,7 +1,7 @@
 module Jekyll
   module Tags
     class ContentFor < Liquid::Block
-      include ::Jekyll::ContentBlockTag
+      include ::Jekyll::ContentBlocks::ContentBlockTag
       alias_method :render_block, :render
 
       def render(context)

@@ -10,16 +10,13 @@ module Jekyll
   end
 end
 
-require 'jekyll/convertible'
-require File.expand_path('../jekyll/convertible', __FILE__)
-
+require 'jekyll/content_blocks/convertible'
 unless Jekyll.version_less_than?('2.0.0')
-  require 'jekyll/renderer'
-  require File.expand_path('../jekyll/renderer', __FILE__)
+  require 'jekyll/content_blocks/renderer'
 end
 
-require 'jekyll/contentblocks/version'
-require 'jekyll/content_block_tag'
+require 'jekyll/content_blocks/version'
+require 'jekyll/content_blocks/content_block_tag'
 require 'jekyll/tags/content_for'
 require 'jekyll/tags/if_has_content'
 require 'jekyll/tags/if_not_has_content'
