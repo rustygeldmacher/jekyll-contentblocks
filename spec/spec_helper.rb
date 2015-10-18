@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'jekyll-contentblocks'
+require 'pry-byebug'
 
 module SpecHelpers
   def jekyll_version

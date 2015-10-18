@@ -1,19 +1,23 @@
 module Jekyll
   module ContentBlocks
     module ContentBlockTag
-      def initialize(tag_name, block_name, tokens)
+      attr_accessor :content_block_name
+      attr_accessor :content_block_options
+
+      def initialize(tag_name, markup, tokens)
         super
-        @block_name = get_content_block_name(tag_name, block_name)
+        parse_options(markup)
+        if content_block_name == ''
+          raise SyntaxError.new("No block name given in #{tag_name} tag")
+        end
       end
 
       private
 
-      def get_content_block_name(tag_name, block_name)
-        block_name = (block_name || '').strip
-        if block_name == ''
-          raise SyntaxError.new("No block name given in #{tag_name} tag")
-        end
-        block_name
+      def parse_options(markup)
+        options = (markup || '').split(' ').map(&:strip)
+        self.content_block_name = options.shift
+        self.content_block_options = options
       end
 
       def block_has_content?(context)
@@ -22,8 +26,9 @@ module Jekyll
       end
 
       def content_for_block(context)
-        context.environments.first['contentblocks'] ||= {}
-        context.environments.first['contentblocks'][@block_name] ||= []
+        environment = context.environments.first
+        environment['contentblocks'] ||= {}
+        environment['contentblocks'][content_block_name] ||= []
       end
     end
   end

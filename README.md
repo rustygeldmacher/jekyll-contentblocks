@@ -1,6 +1,7 @@
 # jekyll-contentblocks
 
-Gives you a mechanism in Jekyll to pass content up from pages into their parent layouts. It's kind of like having Rails' content_for available for Jekyll.
+Gives you a mechanism in Jekyll to pass content up from pages into their parent
+layouts. It's kind of like having Rails' content_for available for Jekyll.
 
 ## Installation
 
@@ -39,7 +40,9 @@ require "jekyll-contentblocks"
 
 ## Usage
 
-In your layout files, define `contentblock` blocks that say where content will end up. For example, say the file `_layouts/default.html` looks like this:
+In your layout files, define `contentblock` blocks that say where content will
+end up. For example, say the file `_layouts/default.html` looks like this:
+
 ```html
 <html>
   <head>
@@ -72,12 +75,28 @@ Here is my post content.
 {% endcontentfor %}
 ```
 
-Note that we didn't add anything to the `scripts` block in the post. That's OK, content blocks without any content will be ignored.
+Note that we didn't add anything to the `scripts` block in the post. That's OK,
+content blocks without any content will be ignored.
+
+### Skipping content conversion in a block
+
+By default, a content block will be run through the converter for the current
+file (Markdown, for instance). Sometimes this is not desirable, such as for
+blocks containing code that shouldn't be modified. In the example above, content
+in the `scripts` block will be converted by default. To prevent this, add the
+`no-convert` option to the block, like this:
+
+```
+{% contentblock scripts no-convert %}
+```
+
+Now any content added to `scripts` will be placed in the block without any
+formatting applied.
 
 ### Checking if a block has content
 
-We might want to check if the particular contentblock has content before using it in our template.
-To do this, use the `ifhascontent` tag:
+We might want to check if the particular contentblock has content before using
+it in our template. To do this, use the `ifhascontent` tag:
 
 ```liquid
 {% ifhascontent javascripts %}

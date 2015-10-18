@@ -47,7 +47,8 @@ describe Jekyll::ContentBlocks do
       end
 
       it 'does not process Markdown in the CSS block' do
-        expect(page.css('style p')).to be_empty
+        styles = page.css('style').text.gsub(/\s/, '')
+        expect(styles).to eq 'div{font-weight:bold;}'
       end
 
       it 'renders the custom footer' do
