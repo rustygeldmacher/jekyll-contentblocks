@@ -101,7 +101,7 @@ it in our template. To do this, use the `ifhascontent` tag:
 ```liquid
 {% ifhascontent javascripts %}
   <script type="text/javascript>
-    {% contentfor javascripts %}
+    {% contentblock javascripts %}
   </script>
 {% endifhascontent %}
 ```
