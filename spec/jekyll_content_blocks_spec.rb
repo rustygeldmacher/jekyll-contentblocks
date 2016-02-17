@@ -40,7 +40,6 @@ describe Jekyll::ContentBlocks do
 
     describe 'page.html' do
       let(:page) { load_html('page.html') }
-      let(:sidebar) { index.css('body > div > h2#sidebar').first }
 
       it 'renders the css block' do
         expect(page.css('style')).not_to be_empty
@@ -59,6 +58,16 @@ describe Jekyll::ContentBlocks do
       it 'renders the default sidebar' do
         expect(page.css('div.sidebar-default')).not_to be_empty
         expect(page.css('div.custom-sidebar')).to be_empty
+      end
+    end
+
+    describe 'page2.html' do
+      let(:page) { load_html('page2.html') }
+
+      it 'renders only the page2 sidebar' do
+        sidebar = page.css('div.custom-sidebar')
+        expect(sidebar).not_to be_empty
+        expect(sidebar.text.strip).to eq 'A pretty simple sidebar.'
       end
     end
 
