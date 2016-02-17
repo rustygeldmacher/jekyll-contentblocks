@@ -1,3 +1,4 @@
+# NOTE: Currently does not work with Jekyll 3.1.x -- for a temporary fix, please try using Jekyll 3.0.3
 # jekyll-contentblocks
 
 Gives you a mechanism in Jekyll to pass content up from pages into their parent
