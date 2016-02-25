@@ -10,9 +10,18 @@ module Jekyll
   end
 end
 
-require 'jekyll/content_blocks/convertible'
-unless Jekyll.version_less_than?('2.0.0')
-  require 'jekyll/content_blocks/renderer'
+if Jekyll.version_less_than?('3.0.0')
+  require 'jekyll/content_blocks/convertible'
+  unless Jekyll.version_less_than?('2.0.0')
+    require 'jekyll/content_blocks/renderer'
+  end
+else
+  require 'jekyll/content_blocks/pre_render_hook'
+  [:documents, :pages, :posts].each do |content_type|
+    Jekyll::Hooks.register content_type, :pre_render do |doc, payload|
+      Jekyll::ContentBlocks::PreRenderHook.call(doc, payload)
+    end
+  end
 end
 
 require 'jekyll/content_blocks/version'

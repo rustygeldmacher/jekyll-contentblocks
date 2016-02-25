@@ -1,4 +1,3 @@
-# NOTE: Currently does not work with Jekyll 3.1.x -- for a temporary fix, please try using Jekyll 3.0.3
 # jekyll-contentblocks
 
 Gives you a mechanism in Jekyll to pass content up from pages into their parent
@@ -10,7 +9,9 @@ layouts. It's kind of like having Rails' content_for available for Jekyll.
 
 Add this line to your Jekyll project's `Gemfile`:
 ```ruby
-gem 'jekyll-contentblocks'
+ group :jekyll_plugins do
+   gem 'jekyll-contentblocks'
+ end
 ```
 
 Then execute:
@@ -18,15 +19,8 @@ Then execute:
 $ bundle install
 ```
 
-Make sure your have a plugin that initializes Bundler:
-```ruby
-# _plugins/bundler.rb
-require "rubygems"
-require "bundler/setup"
-Bundler.require(:default)
-```
-
 ### Standalone
+
 Execute:
 ```bash
 $ gem install jekyll-contentblocks
