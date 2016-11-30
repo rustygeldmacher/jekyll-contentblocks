@@ -95,7 +95,7 @@ it in our template. To do this, use the `ifhascontent` tag:
 
 ```liquid
 {% ifhascontent javascripts %}
-  <script type="text/javascript>
+  <script type="text/javascript">
     {% contentblock javascripts %}
   </script>
 {% endifhascontent %}
