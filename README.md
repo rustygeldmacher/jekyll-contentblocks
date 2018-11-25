@@ -206,9 +206,9 @@ link: "https://www.soton.ac.uk"
     <hr/>
     <div class="qualifications">
       <div class="image_carousel">
-		{% for qualification in page.contentblocks.qualifications %}
-		  <div class="vertical_layout"> 
-		    <div>
+        {% for qualification in page.contentblocks.qualifications %}
+          <div class="vertical_layout"> 
+            <div>
               <img class="popup rounded_corners mouse_over_highlight" 
                   href={{ qualification.data.photo }} alt={{ qualification.photo_alt }}>
             </div>
@@ -217,11 +217,11 @@ link: "https://www.soton.ac.uk"
                 <img href={{ qualification.data.logo }}/>
               </a>
             <div class=content_box> 
-			  {{ qualification.content }}
-			</div>
-		  </div>
-	    {% endfor %}
-	  </div>
+              {{ qualification.content }}
+            </div>
+          </div>
+	{% endfor %}
+      </div>
     </div>
   </body>
 </html>
