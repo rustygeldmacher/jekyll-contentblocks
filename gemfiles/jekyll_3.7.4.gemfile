@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby "2.2.2"
 
-gem "jekyll", "3.0.3"
+gem "jekyll", "3.7.4"
 gem "appraisal", "1.0.2"
 gem "pry"
 gem "pry-byebug"
