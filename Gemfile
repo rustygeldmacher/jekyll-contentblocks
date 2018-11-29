@@ -2,12 +2,12 @@ source 'https://rubygems.org'
 
 ruby "2.2.2"
 
-gem 'jekyll', '3.1.2'
+gem 'jekyll', '~> 3.8.0'
 gem 'appraisal', '1.0.2'
 
 gem 'pry'
 gem 'pry-byebug'
 gem 'rspec', '~> 3.3.0'
-gem 'nokogiri', '~> 1.6.6.0'
+gem 'nokogiri', '~> 1.8.0'
 
 gemspec
