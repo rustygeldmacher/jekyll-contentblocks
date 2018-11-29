@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "2.2.2"
+
 gem 'jekyll', '3.1.2'
 gem 'appraisal', '1.0.2'
 

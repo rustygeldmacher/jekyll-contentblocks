@@ -5,6 +5,9 @@ layouts. It's kind of like having Rails' content_for available for Jekyll.
 
 ## Installation
 
+jekyll-contentblocks supports Jekyll 2.3.0 and above. Any other version below
+2.3.0 is not guaranteed to work.
+
 ### Bundler (recommended)
 
 Add this line to your Jekyll project's `Gemfile`:
