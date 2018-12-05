@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{A Jekyll plugin kind of like Rails' content_for}
   gem.homepage      = "https://github.com/rustygeldmacher/jekyll-contentblocks"
 
-  gem.files         = `git ls-files`.split($/)
+  gem.files         = `git ls-files`.split($/) - ["Gemfile.lock"]
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
