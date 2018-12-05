@@ -1,6 +1,7 @@
 require 'nokogiri'
 require 'jekyll-contentblocks'
 require 'pry-byebug'
+require 'open3'
 
 module SpecHelpers
   def jekyll_version
@@ -8,8 +9,13 @@ module SpecHelpers
   end
 
   def generate_test_site
-    system 'rm -rf test/_site'
-    system 'jekyll build -s test/ -d test/_site &> /dev/null'
+    FileUtils.rm_rf('test/_site')
+    exit_status = -1
+    Open3.popen3('jekyll build -s test/ -d test/_site') do |i, o, e, t|
+      o.read
+      exit_status = t.value.exitstatus
+    end
+    exit_status == 0
   end
 
   def load_html(file)
