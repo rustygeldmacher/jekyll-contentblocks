@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.2.2"
+ruby "2.5.3"
 
 gem 'jekyll', '~> 3.8.0'
 gem 'appraisal', '1.0.2'
