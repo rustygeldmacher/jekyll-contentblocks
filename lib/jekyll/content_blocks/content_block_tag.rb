@@ -26,9 +26,10 @@ module Jekyll
       end
 
       def content_for_block(context)
-        environment = context.environments.first
-        environment['contentblocks'] ||= {}
-        environment['contentblocks'][content_block_name] ||= []
+        page = context.environments.first['page']['path']
+	      context.environments.first['contentblocks'] ||= {}
+	      context.environments.first['contentblocks'][page] ||= {}
+	      context.environments.first['contentblocks'][page][@input] ||= []
       end
     end
   end
