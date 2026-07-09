@@ -11,6 +11,27 @@ jekyll-contentblocks supports Jekyll 3.0 and above. Jekyll 3.0–3.7 require
 Ruby 2.7 (they use APIs removed in Ruby 3), while Jekyll 3.8 and above run on
 Ruby 2.7 through 4.0. Jekyll versions below 3.0 are no longer supported.
 
+The combinations exercised in CI (Ruby across the top, Jekyll down the side):
+
+| Jekyll \ Ruby | 2.7.x | 3.3.x | 3.4.x | 4.0.x |
+| --- | :---: | :---: | :---: | :---: |
+| 3.0.x  | ✅ | ❌ | ❌ | ❌ |
+| 3.1.x  | ✅ | ❌ | ❌ | ❌ |
+| 3.2.x  | ✅ | ❌ | ❌ | ❌ |
+| 3.3.x  | ✅ | ❌ | ❌ | ❌ |
+| 3.4.x  | ✅ | ❌ | ❌ | ❌ |
+| 3.5.x  | ✅ | ❌ | ❌ | ❌ |
+| 3.6.x  | ✅ | ❌ | ❌ | ❌ |
+| 3.7.x  | ✅ | ❌ | ❌ | ❌ |
+| 3.8.x  | ✅ | ✅ | ✅ | ✅ |
+| 3.9.x  | ✅ | ✅ | ✅ | ✅ |
+| 3.10.x | ✅ | ✅ | ✅ | ✅ |
+| 4.0.x  | ✅ | ✅ | ✅ | ✅ |
+| 4.1.x  | ✅ | ✅ | ✅ | ✅ |
+| 4.2.x  | ✅ | ✅ | ✅ | ✅ |
+| 4.3.x  | ✅ | ✅ | ✅ | ✅ |
+| 4.4.x  | ✅ | ✅ | ✅ | ✅ |
+
 ### Bundler (recommended)
 
 Add this line to your Jekyll project's `Gemfile`:
