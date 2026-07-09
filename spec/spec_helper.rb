@@ -24,11 +24,7 @@ module SpecHelpers
   end
 
   def load_item_html(item)
-    if Jekyll.version_less_than?('2.1.0')
-      load_html("items/#{item}.html")
-    else
-      load_html("items/#{item}/index.html")
-    end
+    load_html("items/#{item}/index.html")
   end
 end
 
