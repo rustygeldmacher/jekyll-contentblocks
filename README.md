@@ -1,14 +1,15 @@
 # jekyll-contentblocks
 
-CicleCI build: [![CircleCI](https://circleci.com/gh/rustygeldmacher/jekyll-contentblocks.svg?style=svg)](https://circleci.com/gh/rustygeldmacher/jekyll-contentblocks)
+[![CI](https://github.com/rustygeldmacher/jekyll-contentblocks/actions/workflows/ci.yml/badge.svg)](https://github.com/rustygeldmacher/jekyll-contentblocks/actions/workflows/ci.yml)
 
 Gives you a mechanism in Jekyll to pass content up from pages into their parent
 layouts. It's kind of like having Rails' content_for available for Jekyll.
 
 ## Installation
 
-jekyll-contentblocks supports Jekyll 2.3.0 and above. Any other version below
-2.3.0 is not guaranteed to work.
+jekyll-contentblocks supports Jekyll 3.0 and above. Jekyll 3.0–3.7 require
+Ruby 2.7 (they use APIs removed in Ruby 3), while Jekyll 3.8 and above run on
+Ruby 2.7 through 4.0. Jekyll versions below 3.0 are no longer supported.
 
 ### Bundler (recommended)
 

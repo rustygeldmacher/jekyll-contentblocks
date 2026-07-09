@@ -17,5 +17,6 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency('jekyll')
+  # The 3.x series is what we test and support; widen once 4.x is verified.
+  gem.add_dependency('jekyll', '~> 3.0')
 end

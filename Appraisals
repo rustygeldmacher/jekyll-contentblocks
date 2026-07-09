@@ -1,14 +1,7 @@
-appraise "jekyll-2.3.0" do
-  gem "jekyll", "2.3.0"
-end
-
-appraise "jekyll-2.4.0" do
-  gem "jekyll", "2.4.0"
-end
-
-appraise "jekyll-2.5.3" do
-  gem "jekyll", "2.5.3"
-end
+# Every version runs against Ruby 2.7 in CI (Jekyll's supported minimum).
+# Jekyll 3.8+ is additionally tested against Ruby 3.3, 3.4 and 4.0; Jekyll 3.0–3.7
+# can't run on Ruby 3 (they use APIs removed in it: URI.escape, Fixnum, and
+# positional Hash args to File.read). See .github/workflows/ci.yml for the matrix.
 
 appraise "jekyll-3.0.5" do
   gem "jekyll", "3.0.5"
@@ -42,6 +35,18 @@ appraise "jekyll-3.7.4" do
   gem "jekyll", "3.7.4"
 end
 
-appraise "jekyll-3.8.5" do
-  gem "jekyll", "3.8.5"
+appraise "jekyll-3.8.7" do
+  gem "jekyll", "3.8.7"
+end
+
+appraise "jekyll-3.9.5" do
+  gem "jekyll", "3.9.5"
+  # Jekyll 3.9+ uses kramdown 2.x, which extracted the GFM parser into its own gem
+  gem "kramdown-parser-gfm"
+end
+
+appraise "jekyll-3.10.0" do
+  gem "jekyll", "3.10.0"
+  # Jekyll 3.9+ uses kramdown 2.x, which extracted the GFM parser into its own gem
+  gem "kramdown-parser-gfm"
 end
