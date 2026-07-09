@@ -55,3 +55,7 @@ end
 appraise "jekyll-4.0.1" do
   gem "jekyll", "4.0.1"
 end
+
+appraise "jekyll-4.1.1" do
+  gem "jekyll", "4.1.1"
+end
