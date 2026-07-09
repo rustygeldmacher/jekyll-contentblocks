@@ -2,10 +2,8 @@ module Jekyll
   module ContentBlocks
     class PreRenderHook
       def self.call(document, payload)
-        payload['converters'] = document.site.converters.select do |converter|
-          file_extension = File.extname(document.path)
-          converter.matches(file_extension)
-        end
+        # Reset the per-document block store. Converters are derived on demand by
+        # the contentblock tag from the render context, so they aren't stashed here.
         payload['contentblocks'] = {}
       end
     end

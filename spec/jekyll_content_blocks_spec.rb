@@ -81,24 +81,22 @@ describe Jekyll::ContentBlocks do
       end
     end
 
-    if Jekyll.supports_collections?
-      describe 'content blocks in a collection' do
-        let(:item_one) { load_item_html('one') }
-        let(:item_two) { load_item_html('two') }
+    describe 'content blocks in a collection' do
+      let(:item_one) { load_item_html('one') }
+      let(:item_two) { load_item_html('two') }
 
-        it 'should render the content block' do
-          expect(item_one.css('div[class=sidebar-default]')).to be_empty
-          expect(item_one.css('div[class=custom-sidebar]')).not_to be_empty
-        end
+      it 'should render the content block' do
+        expect(item_one.css('div[class=sidebar-default]')).to be_empty
+        expect(item_one.css('div[class=custom-sidebar]')).not_to be_empty
+      end
 
-        it 'should skip a content block that was not defined' do
-          expect(item_two.css('div[class=sidebar-default]')).not_to be_empty
-          expect(item_two.css('div[class=custom-sidebar]')).to be_empty
-        end
+      it 'should skip a content block that was not defined' do
+        expect(item_two.css('div[class=sidebar-default]')).not_to be_empty
+        expect(item_two.css('div[class=custom-sidebar]')).to be_empty
+      end
 
-        it 'should process Markdown inside the content block' do
-          expect(item_one.css('div[class=custom-sidebar] ul li')).not_to be_empty
-        end
+      it 'should process Markdown inside the content block' do
+        expect(item_one.css('div[class=custom-sidebar] ul li')).not_to be_empty
       end
     end
   end
