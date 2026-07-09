@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     jekyll-contentblocks (1.2.0)
-      jekyll
+      jekyll (~> 3.0)
 
 GEM
   remote: https://rubygems.org/
