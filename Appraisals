@@ -1,6 +1,6 @@
 # Jekyll 3.0–3.7 run against Ruby 2.7 in CI (they use APIs removed in Ruby 3:
 # URI.escape, Fixnum, and positional Hash args to File.read). Jekyll 3.8+ runs
-# against Ruby 3.3. See .circleci/config.yml for the version/Ruby matrix.
+# against Ruby 3.3. See .github/workflows/ci.yml for the version/Ruby matrix.
 
 appraise "jekyll-3.0.5" do
   gem "jekyll", "3.0.5"

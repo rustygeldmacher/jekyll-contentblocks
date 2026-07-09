@@ -1,6 +1,6 @@
 # jekyll-contentblocks
 
-CicleCI build: [![CircleCI](https://circleci.com/gh/rustygeldmacher/jekyll-contentblocks.svg?style=svg)](https://circleci.com/gh/rustygeldmacher/jekyll-contentblocks)
+[![CI](https://github.com/rustygeldmacher/jekyll-contentblocks/actions/workflows/ci.yml/badge.svg)](https://github.com/rustygeldmacher/jekyll-contentblocks/actions/workflows/ci.yml)
 
 Gives you a mechanism in Jekyll to pass content up from pages into their parent
 layouts. It's kind of like having Rails' content_for available for Jekyll.

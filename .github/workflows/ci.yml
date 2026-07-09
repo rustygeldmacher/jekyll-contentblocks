@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  test:
+    name: Jekyll ${{ matrix.jekyll }} (Ruby ${{ matrix.ruby }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Jekyll 3.0–3.7 use APIs removed in Ruby 3 (URI.escape, Fixnum,
+        # positional Hash args to File.read), so they run on Ruby 2.7.
+        # Jekyll 3.8+ runs on Ruby 3.3. The gemfiles carry no `ruby` pin.
+        include:
+          - { ruby: '2.7', jekyll: '3.0.5' }
+          - { ruby: '2.7', jekyll: '3.1.6' }
+          - { ruby: '2.7', jekyll: '3.2.1' }
+          - { ruby: '2.7', jekyll: '3.3.1' }
+          - { ruby: '2.7', jekyll: '3.4.5' }
+          - { ruby: '2.7', jekyll: '3.5.2' }
+          - { ruby: '2.7', jekyll: '3.6.3' }
+          - { ruby: '2.7', jekyll: '3.7.4' }
+          - { ruby: '3.3', jekyll: '3.8.7' }
+          - { ruby: '3.3', jekyll: '3.9.5' }
+          - { ruby: '3.3', jekyll: '3.10.0' }
+    env:
+      BUNDLE_GEMFILE: gemfiles/jekyll_${{ matrix.jekyll }}.gemfile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true
+      - run: bundle exec rspec
