@@ -38,6 +38,10 @@ jobs:
           - { ruby: '4.0', jekyll: '3.8.7' }
           - { ruby: '4.0', jekyll: '3.9.5' }
           - { ruby: '4.0', jekyll: '3.10.0' }
+          - { ruby: '2.7', jekyll: '4.0.1' }
+          - { ruby: '3.3', jekyll: '4.0.1' }
+          - { ruby: '3.4', jekyll: '4.0.1' }
+          - { ruby: '4.0', jekyll: '4.0.1' }
     env:
       BUNDLE_GEMFILE: gemfiles/jekyll_${{ matrix.jekyll }}.gemfile
     steps:

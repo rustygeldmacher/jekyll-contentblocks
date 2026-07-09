@@ -15,4 +15,5 @@ test/tmp
 test/version_tmp
 tmp
 test/_site/
+.jekyll-cache/
 gemfiles/*.lock
