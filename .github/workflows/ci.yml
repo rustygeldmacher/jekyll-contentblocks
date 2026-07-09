@@ -5,45 +5,82 @@ on:
     branches: [master]
   pull_request:
 
+# One job per Ruby version, each with its own list of Jekyll versions.
+# Ruby 2.7 (Jekyll's supported minimum) runs the whole range; Ruby 3.3/3.4/4.0
+# run Jekyll 3.8+ only, since Jekyll 3.0–3.7 use APIs removed in Ruby 3
+# (URI.escape, Fixnum, positional Hash args to File.read). The generated
+# gemfiles carry no `ruby` pin, so each installs on whichever Ruby runs it.
+
 jobs:
-  test:
-    name: Jekyll ${{ matrix.jekyll }} (Ruby ${{ matrix.ruby }})
+  ruby-2-7:
+    name: Jekyll ${{ matrix.jekyll }} (Ruby 2.7)
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        # Every Jekyll version is tested on Ruby 2.7 (still Jekyll's supported
-        # minimum). Jekyll 3.8+ is additionally tested on Ruby 3.3, 3.4 and 4.0;
-        # Jekyll 3.0–3.7 can't run on Ruby 3 (they use URI.escape, Fixnum, and
-        # positional Hash args to File.read, all removed in Ruby 3). The gemfiles
-        # carry no `ruby` pin.
-        include:
-          - { ruby: '2.7', jekyll: '3.0.5' }
-          - { ruby: '2.7', jekyll: '3.1.6' }
-          - { ruby: '2.7', jekyll: '3.2.1' }
-          - { ruby: '2.7', jekyll: '3.3.1' }
-          - { ruby: '2.7', jekyll: '3.4.5' }
-          - { ruby: '2.7', jekyll: '3.5.2' }
-          - { ruby: '2.7', jekyll: '3.6.3' }
-          - { ruby: '2.7', jekyll: '3.7.4' }
-          - { ruby: '2.7', jekyll: '3.8.7' }
-          - { ruby: '2.7', jekyll: '3.9.5' }
-          - { ruby: '2.7', jekyll: '3.10.0' }
-          - { ruby: '3.3', jekyll: '3.8.7' }
-          - { ruby: '3.3', jekyll: '3.9.5' }
-          - { ruby: '3.3', jekyll: '3.10.0' }
-          - { ruby: '3.4', jekyll: '3.8.7' }
-          - { ruby: '3.4', jekyll: '3.9.5' }
-          - { ruby: '3.4', jekyll: '3.10.0' }
-          - { ruby: '4.0', jekyll: '3.8.7' }
-          - { ruby: '4.0', jekyll: '3.9.5' }
-          - { ruby: '4.0', jekyll: '3.10.0' }
+        jekyll: ['3.0.5', '3.1.6', '3.2.1', '3.3.1', '3.4.5', '3.5.2',
+                 '3.6.3', '3.7.4', '3.8.7', '3.9.5', '3.10.0',
+                 '4.0.1', '4.1.1', '4.2.2', '4.3.4', '4.4.1']
     env:
       BUNDLE_GEMFILE: gemfiles/jekyll_${{ matrix.jekyll }}.gemfile
     steps:
       - uses: actions/checkout@v5
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: '2.7'
+          bundler-cache: true
+      - run: bundle exec rspec
+
+  ruby-3-3:
+    name: Jekyll ${{ matrix.jekyll }} (Ruby 3.3)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The Jekyll 3.8+ list is defined once here (&jekyll_3_8_plus) and reused
+        # by the Ruby 3.4 and 4.0 jobs below via the *jekyll_3_8_plus alias.
+        jekyll: &jekyll_3_8_plus ['3.8.7', '3.9.5', '3.10.0',
+                                  '4.0.1', '4.1.1', '4.2.2', '4.3.4', '4.4.1']
+    env:
+      BUNDLE_GEMFILE: gemfiles/jekyll_${{ matrix.jekyll }}.gemfile
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - run: bundle exec rspec
+
+  ruby-3-4:
+    name: Jekyll ${{ matrix.jekyll }} (Ruby 3.4)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        jekyll: *jekyll_3_8_plus
+    env:
+      BUNDLE_GEMFILE: gemfiles/jekyll_${{ matrix.jekyll }}.gemfile
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+      - run: bundle exec rspec
+
+  ruby-4-0:
+    name: Jekyll ${{ matrix.jekyll }} (Ruby 4.0)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        jekyll: *jekyll_3_8_plus
+    env:
+      BUNDLE_GEMFILE: gemfiles/jekyll_${{ matrix.jekyll }}.gemfile
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '4.0'
           bundler-cache: true
       - run: bundle exec rspec

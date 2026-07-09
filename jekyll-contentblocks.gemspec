@@ -18,5 +18,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   # The 3.x series is what we test and support; widen once 4.x is verified.
-  gem.add_dependency('jekyll', '~> 3.0')
+  gem.add_dependency('jekyll', '>= 3.0', '< 5.0')
 end
