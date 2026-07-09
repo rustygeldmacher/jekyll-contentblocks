@@ -9,7 +9,7 @@ layouts. It's kind of like having Rails' content_for available for Jekyll.
 
 jekyll-contentblocks supports Jekyll 3.0 and above. Jekyll 3.0–3.7 require
 Ruby 2.7 (they use APIs removed in Ruby 3), while Jekyll 3.8 and above run on
-Ruby 3.x. Versions below 3.0 are no longer supported.
+Ruby 2.7 through 4.0. Jekyll versions below 3.0 are no longer supported.
 
 ### Bundler (recommended)
 

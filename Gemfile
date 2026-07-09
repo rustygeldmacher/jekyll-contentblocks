@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # No `ruby` pin here on purpose: Appraisal copies this Gemfile's directives into
 # every generated gemfiles/*.gemfile, and those run across a Ruby matrix (all
-# versions on 2.7, plus Jekyll 3.8+ on 3.3). See .github/workflows/ci.yml and Appraisals.
+# versions on 2.7, plus Jekyll 3.8+ on 3.3/3.4/4.0). See .github/workflows/ci.yml and Appraisals.
 gem 'jekyll', '~> 3.8.0'
 gem 'rexml'
 gem 'appraisal', '~> 2.5.0'
