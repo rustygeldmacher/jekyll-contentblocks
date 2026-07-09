@@ -11,4 +11,11 @@ gem 'pry'
 gem 'rspec', '~> 3.13.0'
 gem 'nokogiri'
 
+# Declared here (not in the gemspec) so they are not forced on consumers of the
+# gem. They silence "loaded from the standard library" warnings that Jekyll's own
+# deps (safe_yaml, liquid) trigger on Ruby 3.3+, where these leave the default gems.
+gem 'base64'
+gem 'bigdecimal'
+gem 'csv'
+
 gemspec

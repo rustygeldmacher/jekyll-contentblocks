@@ -9,13 +9,10 @@ module SpecHelpers
 
   def generate_test_site
     FileUtils.rm_rf('test/_site')
-    exit_status = -1
-    Open3.popen3('jekyll build -s test/ -d test/_site') do |i, o, e, t|
-      puts o.read
-      puts e.read
-      exit_status = t.value.exitstatus
-    end
-    exit_status == 0
+    output, status = Open3.capture2e('jekyll build -s test/ -d test/_site')
+    # Keep passing runs quiet; only surface the build log when it actually fails.
+    warn output unless status.success?
+    status.success?
   end
 
   def load_html(file)
