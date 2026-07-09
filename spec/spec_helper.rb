@@ -1,6 +1,5 @@
 require 'nokogiri'
 require 'jekyll-contentblocks'
-require 'pry-byebug'
 require 'open3'
 
 module SpecHelpers
@@ -12,7 +11,8 @@ module SpecHelpers
     FileUtils.rm_rf('test/_site')
     exit_status = -1
     Open3.popen3('jekyll build -s test/ -d test/_site') do |i, o, e, t|
-      o.read
+      puts o.read
+      puts e.read
       exit_status = t.value.exitstatus
     end
     exit_status == 0
@@ -20,7 +20,7 @@ module SpecHelpers
 
   def load_html(file)
     path = "test/_site/#{file}"
-    if File.exists?(path)
+    if File.exist?(path)
       index_html = File.read(path)
       Nokogiri::Slop(index_html).html
     end
