@@ -34,6 +34,16 @@
       This is the default footer.
     </div>
     {% endifnothascontent %}
+
+    {% if contentblocks.testimonial %}
+      <div class="testimonials">
+        {% for testimonial in contentblocks.testimonial %}
+          <div class="testimonial" data-author="{{ testimonial.data.author }}">
+            {{ testimonial.content }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
   </body>
 </html>
 
