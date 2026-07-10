@@ -1,2 +1,1 @@
-require 'jekyll-contentblocks'
-
+require "jekyll-contentblocks"
