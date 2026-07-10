@@ -154,5 +154,20 @@ of Jekyll. To do this, run the test suite:
 ```bash
 > bundle
 > bundle exec appraisal install
-> bundle exec appraisal rpsec
+> bundle exec appraisal rspec
 ```
+
+### Formatting
+
+Ruby code is formatted with [rubyfmt](https://github.com/fables-tales/rubyfmt),
+which is installed (along with Ruby) via [mise](https://mise.jdx.dev) from the
+versions pinned in `mise.toml`:
+
+```bash
+> mise install                     # install Ruby + the pinned rubyfmt
+> mise exec -- rubyfmt -i .         # format in place
+> mise exec -- rubyfmt --check .    # check formatting (what CI runs)
+```
+
+CI runs `rubyfmt --check` as a gate before the test matrix, so unformatted
+code fails the build early.

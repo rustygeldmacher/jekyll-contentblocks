@@ -1,0 +1,5 @@
+[tools]
+ruby = "3.3"
+# rubyfmt isn't in the mise registry, so install it from its GitHub releases
+# via the github backend (github.com/fables-tales/rubyfmt).
+"github:fables-tales/rubyfmt" = "0.14.1"

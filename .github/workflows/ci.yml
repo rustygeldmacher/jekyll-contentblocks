@@ -12,9 +12,30 @@ on:
 # gemfiles carry no `ruby` pin, so each installs on whichever Ruby runs it.
 
 jobs:
+  # Formatting gate. The test jobs below `needs:` this, so a rubyfmt failure
+  # skips the whole matrix instead of burning runners on it.
+  rubyfmt:
+    name: rubyfmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # mise's github/ubi backends mislocate rubyfmt's oddly-nested release
+      # tarball on Linux, so install the standalone binary directly. The version
+      # is read from mise.toml, which stays the source of truth (and is what local
+      # dev uses via `mise install`). rubyfmt is self-contained — no Ruby needed.
+      - name: Install rubyfmt
+        run: |
+          version="$(grep -oE 'fables-tales/rubyfmt" = "[0-9.]+"' mise.toml | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')"
+          echo "Installing rubyfmt $version"
+          curl -fsSL "https://github.com/fables-tales/rubyfmt/releases/download/v${version}/rubyfmt-v${version}-Linux-x86_64.tar.gz" \
+            | tar -xz -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/tmp/releases/v${version}-Linux" >> "$GITHUB_PATH"
+      - run: rubyfmt --check .
+
   ruby-2-7:
     name: Jekyll ${{ matrix.jekyll }} (Ruby 2.7)
     runs-on: ubuntu-latest
+    needs: rubyfmt
     strategy:
       fail-fast: false
       matrix:
@@ -34,6 +55,7 @@ jobs:
   ruby-3-3:
     name: Jekyll ${{ matrix.jekyll }} (Ruby 3.3)
     runs-on: ubuntu-latest
+    needs: rubyfmt
     strategy:
       fail-fast: false
       matrix:
@@ -54,6 +76,7 @@ jobs:
   ruby-3-4:
     name: Jekyll ${{ matrix.jekyll }} (Ruby 3.4)
     runs-on: ubuntu-latest
+    needs: rubyfmt
     strategy:
       fail-fast: false
       matrix:
@@ -71,6 +94,7 @@ jobs:
   ruby-4-0:
     name: Jekyll ${{ matrix.jekyll }} (Ruby 4.0)
     runs-on: ubuntu-latest
+    needs: rubyfmt
     strategy:
       fail-fast: false
       matrix:
