@@ -138,6 +138,52 @@ Similarly, there's the opposite tag, `ifnothascontent`:
 {% endifnothascontent %}
 ```
 
+### Repeating a block and reading its front matter
+
+You can use the same block name more than once on a page. Each block is
+collected into an array available in the layout at `contentblocks.<name>`,
+so you can loop over the individual blocks instead of rendering them as one
+concatenated chunk.
+
+Each block may also start with its own YAML front matter. The front matter is
+parsed into a `data` hash, and the remaining Markdown becomes `content`
+(converted just like a normal block). This lets an author write a few simple
+Markdown blocks while the layout arranges them into something richer.
+
+For example, a page with a list of testimonials:
+
+```liquid
+{% contentfor testimonial %}
+---
+author: Ada Lovelace
+---
+A **delightful** plugin.
+{% endcontentfor %}
+
+{% contentfor testimonial %}
+---
+author: Alan Turing
+---
+Saved us hours of work.
+{% endcontentfor %}
+```
+
+The layout can then loop over them, reading each block's `content` and `data`:
+
+```liquid
+<ul class="testimonials">
+  {% for testimonial in contentblocks.testimonial %}
+    <li>
+      {{ testimonial.content }}
+      <cite>{{ testimonial.data.author }}</cite>
+    </li>
+  {% endfor %}
+</ul>
+```
+
+The original `{% contentblock testimonial %}` tag still works too — it renders
+all of the blocks together.
+
 ## Contributing
 
 1. Fork it

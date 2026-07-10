@@ -99,5 +99,31 @@ describe Jekyll::ContentBlocks do
         expect(item_one.css("div[class=custom-sidebar] ul li")).not_to(be_empty)
       end
     end
+
+    describe "page3.html (repeated blocks and front matter)" do
+      let(:page) { load_html("page3.html") }
+      let(:testimonials) { page.css("div.testimonials div.testimonial") }
+
+      it "collects each same-named block into contentblocks" do
+        expect(testimonials.length).to(eq(3))
+      end
+
+      it "exposes each block's front matter under data" do
+        expect(testimonials[0]["data-author"]).to(eq("Ada Lovelace"))
+        expect(testimonials[1]["data-author"]).to(eq("Alan Turing"))
+      end
+
+      it "leaves data empty for a block without front matter" do
+        expect(testimonials[2]["data-author"].to_s).to(eq(""))
+      end
+
+      it "converts each block's Markdown content" do
+        expect(testimonials[0].css("strong").text).to(eq("delightful"))
+      end
+
+      it "does not render the section on pages without those blocks" do
+        expect(index.css("div.testimonials")).to(be_empty)
+      end
+    end
   end
 end

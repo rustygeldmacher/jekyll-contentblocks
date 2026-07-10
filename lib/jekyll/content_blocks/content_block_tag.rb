@@ -21,14 +21,34 @@ module Jekyll
       end
 
       def block_has_content?(context)
-        block_content = content_for_block(context).join
-        !(block_content.nil? || block_content.empty?)
+        !raw_block_content(context).empty?
       end
 
+      # Each stored block is a hash: "raw" (the block body), "content" (that body
+      # converted) and "data" (the block's own front matter). The array is exposed
+      # to layouts as contentblocks.<name> so they can be looped over.
       def content_for_block(context)
         environment = context.environments.first
         environment["contentblocks"] ||= {}
         environment["contentblocks"][content_block_name] ||= []
+      end
+
+      def raw_block_content(context)
+        content_for_block(context).map { |block| block["raw"] }.join
+      end
+
+      # Convert content with the document's converters, derived from the render
+      # context (so we don't depend on the pre-render hook stashing them).
+      def converted_content(content, context)
+        Array(converters_for(context)).reduce(content) do |result, converter|
+          converter.convert(result)
+        end
+      end
+
+      def converters_for(context)
+        site = context.registers[:site]
+        extension = File.extname(context.registers[:page]["path"].to_s)
+        site.converters.select { |converter| converter.matches(extension) }
       end
     end
   end
