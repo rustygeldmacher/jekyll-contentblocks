@@ -15,7 +15,7 @@ module Jekyll
       private
 
       def convert_content?
-        !content_block_options.include?('no-convert')
+        !content_block_options.include?("no-convert")
       end
 
       def converted_content(block_content, context)
@@ -28,7 +28,7 @@ module Jekyll
       # don't depend on the pre-render hook stashing them in the payload.
       def converters_for(context)
         site = context.registers[:site]
-        extension = File.extname(context.registers[:page]['path'].to_s)
+        extension = File.extname(context.registers[:page]["path"].to_s)
         site.converters.select { |converter| converter.matches(extension) }
       end
     end

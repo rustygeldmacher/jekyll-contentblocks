@@ -6,9 +6,8 @@ module Jekyll
 
       def render(context)
         content_for_block(context) << render_block(context)
-        ''
+        ""
       end
     end
   end
 end
-

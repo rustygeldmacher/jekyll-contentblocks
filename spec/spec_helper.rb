@@ -1,17 +1,17 @@
-require 'nokogiri'
-require 'jekyll-contentblocks'
-require 'open3'
+require "nokogiri"
+require "jekyll-contentblocks"
+require "open3"
 
 module SpecHelpers
   def jekyll_version
-    @jekyll_version ||= `jekyll --version`.strip.gsub('jekyll ', '')
+    @jekyll_version ||= `jekyll --version`.strip.gsub("jekyll ", "")
   end
 
   def generate_test_site
-    FileUtils.rm_rf('test/_site')
-    output, status = Open3.capture2e('jekyll build -s test/ -d test/_site')
+    FileUtils.rm_rf("test/_site")
+    output, status = Open3.capture2e("jekyll build -s test/ -d test/_site")
     # Keep passing runs quiet; only surface the build log when it actually fails.
-    warn output unless status.success?
+    warn(output) unless status.success?
     status.success?
   end
 

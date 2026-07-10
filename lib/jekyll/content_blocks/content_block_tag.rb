@@ -7,7 +7,7 @@ module Jekyll
       def initialize(tag_name, markup, tokens)
         super
         parse_options(markup)
-        if content_block_name == ''
+        if content_block_name == ""
           raise SyntaxError.new("No block name given in #{tag_name} tag")
         end
       end
@@ -15,7 +15,7 @@ module Jekyll
       private
 
       def parse_options(markup)
-        options = (markup || '').split(' ').map(&:strip)
+        options = (markup || "").split(" ").map(&:strip)
         self.content_block_name = options.shift
         self.content_block_options = options
       end
@@ -27,8 +27,8 @@ module Jekyll
 
       def content_for_block(context)
         environment = context.environments.first
-        environment['contentblocks'] ||= {}
-        environment['contentblocks'][content_block_name] ||= []
+        environment["contentblocks"] ||= {}
+        environment["contentblocks"][content_block_name] ||= []
       end
     end
   end
