@@ -117,8 +117,28 @@ formatting applied.
 
 ### Checking if a block has content
 
-We might want to check if the particular contentblock has content before using
-it in our template. To do this, use the `ifhascontent` tag:
+We might want to check whether a block has content before using it in our
+template. The simplest way is a plain Liquid `if` — each block name is exposed
+under `contentblocks`:
+
+```liquid
+{% if contentblocks.sidebar %}
+  {% contentblock sidebar %}
+{% else %}
+  <div>This is our default sidebar.</div>
+{% endif %}
+```
+
+`contentblocks.<name>` is truthy whenever the block was defined on the page, and
+`nil` otherwise. Unlike the tags below, it also composes with other conditions:
+
+```liquid
+{% if contentblocks.sidebar or page.force_sidebar %}
+  ...
+{% endif %}
+```
+
+The `ifhascontent` and `ifnothascontent` tags are also available:
 
 ```liquid
 {% ifhascontent javascripts %}
@@ -128,15 +148,10 @@ it in our template. To do this, use the `ifhascontent` tag:
 {% endifhascontent %}
 ```
 
-Similarly, there's the opposite tag, `ifnothascontent`:
-
-```liquid
-{% ifnothascontent sidebar %}
-  <div>
-    This is our default sidebar.
-  </div>
-{% endifnothascontent %}
-```
+The difference is subtle: these tags test for **non-empty** content, whereas
+`{% if contentblocks.name %}` tests whether the block was *defined* at all. So a
+block that a page defines but leaves empty counts as "no content" for
+`ifhascontent`, yet is still present in `contentblocks`.
 
 ### Repeating a block and reading its front matter
 
