@@ -125,5 +125,32 @@ describe Jekyll::ContentBlocks do
         expect(index.css("div.testimonials")).to(be_empty)
       end
     end
+
+    describe "contentblocks variable" do
+      it "is present for a block that has content" do
+        expect(index.css("span#cb-sidebar-present")).not_to(be_empty)
+      end
+
+      it "stays nil for a block referenced by tags but with no content" do
+        # page.html renders {% ifhascontent sidebar %} but never defines a sidebar,
+        # so contentblocks.sidebar must not have been created as an empty array.
+        expect(load_html("page.html").css("span#cb-sidebar-present")).to(be_empty)
+      end
+    end
+
+    describe "a block defined but left empty" do
+      # `{% if contentblocks.x %}` tests whether the block was defined, while
+      # `ifhascontent` tests for non-empty content — so they diverge here.
+      let(:page) { load_html("emptyblock.html") }
+
+      it "is present in contentblocks (the block was defined)" do
+        expect(page.css("span#cb-sidebar-present")).not_to(be_empty)
+      end
+
+      it "counts as no content for ifhascontent / ifnothascontent" do
+        expect(page.css("div.custom-sidebar")).to(be_empty)
+        expect(page.css("div.sidebar-default")).not_to(be_empty)
+      end
+    end
   end
 end

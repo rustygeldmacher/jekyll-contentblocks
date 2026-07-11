@@ -24,17 +24,24 @@ module Jekyll
         !raw_block_content(context).empty?
       end
 
-      # Each stored block is a hash: "raw" (the block body), "content" (that body
-      # converted) and "data" (the block's own front matter). The array is exposed
-      # to layouts as contentblocks.<name> so they can be looped over.
+      # Write accessor for the contentfor tag: returns the block's array, creating
+      # it if needed. Each stored block is a hash: "raw" (the block body), "content"
+      # (that body converted) and "data" (its own front matter). The store is
+      # exposed to layouts as contentblocks.<name> so they can be looped over.
       def content_for_block(context)
-        environment = context.environments.first
-        environment["contentblocks"] ||= {}
-        environment["contentblocks"][content_block_name] ||= []
+        store = (context.environments.first["contentblocks"] ||= {})
+        store[content_block_name] ||= []
+      end
+
+      # Read-only view — does NOT create an empty entry. Reading a never-defined
+      # block therefore leaves contentblocks.<name> nil (falsy) rather than an
+      # empty array (which Liquid would treat as truthy).
+      def blocks_for(context)
+        (context.environments.first["contentblocks"] || {})[content_block_name] || []
       end
 
       def raw_block_content(context)
-        content_for_block(context).map { |block| block["raw"] }.join
+        blocks_for(context).map { |block| block["raw"] }.join
       end
 
       # Convert content with the document's converters, derived from the render

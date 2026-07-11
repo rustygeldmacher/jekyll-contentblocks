@@ -25,6 +25,10 @@
       </div>
     {% endifnothascontent %}
 
+    {% if contentblocks.sidebar %}
+      <span id="cb-sidebar-present"></span>
+    {% endif %}
+
     {% ifhascontent footer %}
       {% contentblock footer %}
     {% endifhascontent %}
